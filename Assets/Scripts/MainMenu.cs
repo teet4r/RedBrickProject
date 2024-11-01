@@ -5,24 +5,15 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject go_Option;
+    [SerializeField] GameObject go_CutScene;
 
     private bool _isOption = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void BtnPlay()
     {
         if (_isOption) return;
+
+        go_CutScene.SetActive(true);
 
         Debug.Log("Play");
     }

@@ -23,20 +23,24 @@ public class CutScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _sceneNum <= 3)
+        if (Input.GetKeyDown(KeyCode.Space) && _sceneImages.Length >= _sceneNum)
         {
-            _OnScene();
-            _sceneNum++;
-        }
-        else if(Input.GetKeyDown(KeyCode.Space) && _sceneNum == 3)
-        {
-            StartCoroutine(CoFadeOut());
+            PassScene();
         }
     }
 
     void PassScene()
     {
-
+        if (_sceneNum < _sceneImages.Length)
+        {
+            _OnScene();
+            _sceneNum++;
+        }
+        else if (_sceneNum == _sceneImages.Length)
+        {
+            StartCoroutine(CoFadeOut());
+            _sceneNum++;
+        }
     }
 
     private void _OnScene()
@@ -49,13 +53,19 @@ public class CutScene : MonoBehaviour
         float curTime = 0.00f;
         float fadeTime = 0.5f;
 
-        while (curTime >= fadeTime)
+        Debug.Log("Start Fade Out");
+
+        var canvasGroup = fadeBackGround.GetComponent<CanvasGroup>();
+        while (curTime <= fadeTime)
         {
-            fadeBackGround.GetComponent<CanvasRenderer>().SetAlpha(Mathf.Lerp(0f, 1f, curTime / fadeTime));
+            canvasGroup.alpha = (Mathf.Lerp(0f, 1f, curTime / fadeTime));
+
+            Debug.Log("Fade Out");
 
             curTime += Time.deltaTime;
             yield return null;
         }
+        canvasGroup.alpha = 1.0f;
 
         yield break;
     }

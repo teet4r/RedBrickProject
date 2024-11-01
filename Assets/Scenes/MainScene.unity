@@ -1181,6 +1181,7 @@ GameObject:
   - component: {fileID: 712807832}
   - component: {fileID: 712807834}
   - component: {fileID: 712807833}
+  - component: {fileID: 712807835}
   m_Layer: 5
   m_Name: FadeOut
   m_TagString: Untagged
@@ -1220,7 +1221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1245,6 +1246,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712807831}
   m_CullTransparentMesh: 1
+--- !u!225 &712807835
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712807831}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &740817436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,6 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_Option: {fileID: 1412646867}
+  go_CutScene: {fileID: 950887308}
 --- !u!1 &811074101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,7 +1656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &950887309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1715,8 +1729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006778eb07162984e9700c6101aefc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes: {fileID: 0}
-  fadeBackGround: {fileID: 0}
+  scenes: {fileID: 811074101}
+  fadeBackGround: {fileID: 712807831}
 --- !u!1 &954726056
 GameObject:
   m_ObjectHideFlags: 0
