@@ -9,10 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/BootstrapScene.unity
     guid: 9fad524c1241131469a96d7217415bda
   - enabled: 1
+    path: Assets/Scenes/EmptyScene.unity
+    guid: d06c9b1ec530e3f47abd9cbb519114ed
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: bb4e32f2c03b3b745adbbcbab9664aff
   - enabled: 1
-    path: Assets/Scenes/EmptyScene.unity
-    guid: d06c9b1ec530e3f47abd9cbb519114ed
+    path: Assets/Scenes/IngameScene.unity
+    guid: 0be3e9382491b4044925183b36964301
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2a45e88d13211ba4389247fc3fd22886, type: 2}
