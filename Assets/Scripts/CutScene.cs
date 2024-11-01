@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class CutScene : MonoBehaviour
 {
-    public GameObject _scenes;
-    public Image[] _sceneImages = null;
+    public GameObject scenes;
+    public GameObject fadeBackGround;
+
+    private Image[] _sceneImages = null;
 
     private int _sceneNum = 0;
     private Color _orgColor = new Color(1, 1, 1, 1); 
@@ -14,7 +16,7 @@ public class CutScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sceneImages = _scenes.GetComponentsInChildren<Image>();
+        _sceneImages = scenes.GetComponentsInChildren<Image>();
         _sceneNum = 0;
     }
 
@@ -26,6 +28,15 @@ public class CutScene : MonoBehaviour
             _OnScene();
             _sceneNum++;
         }
+        else if(Input.GetKeyDown(KeyCode.Space) && _sceneNum == 3)
+        {
+            StartCoroutine(CoFadeOut());
+        }
+    }
+
+    void PassScene()
+    {
+
     }
 
     private void _OnScene()
@@ -33,5 +44,20 @@ public class CutScene : MonoBehaviour
         _sceneImages[_sceneNum].color = _orgColor;
     }
 
+    IEnumerator CoFadeOut()
+    {
+        float curTime = 0.00f;
+        float fadeTime = 0.5f;
+
+        while (curTime >= fadeTime)
+        {
+            fadeBackGround.GetComponent<CanvasRenderer>().SetAlpha(Mathf.Lerp(0f, 1f, curTime / fadeTime));
+
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield break;
+    }
 
 }
