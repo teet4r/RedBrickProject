@@ -1,10 +1,6 @@
 public enum SceneName
 {
-	Bootstrapper,
-	Lobby,
-	Main,
-	Classroom,
-	ArtRoom,
-	ScienceRoom,
-	Empty,
+	BootstrapScene,
+	MainScene,
+	EmptyScene,
 }

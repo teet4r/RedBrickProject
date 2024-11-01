@@ -13,7 +13,7 @@ public partial class SceneManager : SingletonBehaviour<SceneManager>
 {
     public static async UniTask LoadSceneAsync(SceneName sceneName)
     {
-        await UnitySceneManager.LoadSceneAsync((int)SceneName.Empty);
+        await UnitySceneManager.LoadSceneAsync((int)SceneName.EmptyScene);
         await UniTask.DelayFrame(1);
 
         await UnitySceneManager.LoadSceneAsync((int)sceneName);
@@ -42,7 +42,7 @@ public partial class SceneManager
             SceneAsset sa = null;
             if (!startCurrentScene)
             {
-                var firstScenePath = EditorBuildSettings.scenes[(int)SceneName.Bootstrapper].path;
+                var firstScenePath = EditorBuildSettings.scenes[(int)SceneName.BootstrapScene].path;
                 sa = AssetDatabase.LoadAssetAtPath<SceneAsset>(firstScenePath);
             }
             EditorSceneManager.playModeStartScene = sa;
@@ -59,7 +59,7 @@ public partial class SceneManager
         SceneAsset sa = null;
         if (startCurrentScene)
         {
-            var firstScenePath = EditorBuildSettings.scenes[(int)SceneName.Bootstrapper].path;
+            var firstScenePath = EditorBuildSettings.scenes[(int)SceneName.BootstrapScene].path;
             sa = AssetDatabase.LoadAssetAtPath<SceneAsset>(firstScenePath);
         }
         EditorSceneManager.playModeStartScene = sa;

@@ -18,6 +18,6 @@ public class Bootstrapper : MonoBehaviour
             UIManager.Instance.IsLoaded
         );
 
-        SceneManager.LoadSceneAsync(SceneName.Lobby).Forget();
+        SceneManager.LoadSceneAsync(SceneName.MainScene).Forget();
     }
 }
