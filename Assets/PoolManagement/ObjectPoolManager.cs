@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
 {
@@ -14,7 +15,10 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
         public ObjectPool(string prefabName, Transform parent)
         {
             _parent = parent;
-            _prefab = Resources.Load<PoolObject>(prefabName); // 스크립트와 프리팹 이름은 동일하게
+            var prefab = Addressables.LoadAssetAsync<GameObject>(prefabName);
+            prefab.WaitForCompletion();
+            _prefab = prefab.Result.GetComponent<PoolObject>(); // 스크립트와 프리팹 이름은 동일하게
+            Addressables.Release(prefab);
         }
 
         public PoolObject Get()
@@ -63,8 +67,8 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
         }
     }
 
-    private static Transform _tr;
-    private static Dictionary<Type, ObjectPool> _pools = new();
+    private Transform _tr;
+    private Dictionary<Type, ObjectPool> _pools = new();
 
     protected override void Awake()
     {
@@ -73,10 +77,10 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
         _tr = GetComponent<Transform>();
     }
 
-    public static T Get<T>() where T : PoolObject =>
+    public T Get<T>() where T : PoolObject =>
         _GetPool<T>().Get() as T;
 
-    public static void Return<T>(T obj) where T : PoolObject
+    public void Return<T>(T obj) where T : PoolObject
     {
         if (obj.Tr.parent != _tr)
             obj.Tr.SetParent(_tr);
@@ -84,7 +88,7 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
         _GetPool<T>().Return(obj);
     }
 
-    public static void HideAll()
+    public void HideAll()
     {
         var children = _tr.GetComponentsInChildren<PoolObject>(false);
 
@@ -92,14 +96,14 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
             Return(children[i]);
     }
 
-    public static void ClearAll()
+    public void ClearAll()
     {
         foreach (var pool in _pools.Values)
             pool.Clear();
         _pools.Clear();
     }
 
-    private static ObjectPool _GetPool<T>()
+    private ObjectPool _GetPool<T>()
     {
         var type = typeof(T);
 

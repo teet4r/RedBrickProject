@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6c432331c4c749844b617dd5b79f9aa9
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: ccdb3ed042986524c839e5f1aba9729a
+    m_Address: GirlBody
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 956aa756977d61342b6a58b1517bfb09, type: 2}
   m_SchemaSet:

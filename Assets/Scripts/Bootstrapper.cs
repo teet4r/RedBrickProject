@@ -15,9 +15,10 @@ public class Bootstrapper : MonoBehaviour
         await UniTask.WaitUntil(() =>
             SceneManager.Instance.IsLoaded ||
             AudioManager.Instance.IsLoaded ||
-            ObjectPoolManager.Instance.IsLoaded
+            ObjectPoolManager.Instance.IsLoaded ||
+            SpriteLoader.Instance.IsLoaded
         );
 
-        SceneManager.LoadSceneAsync(SceneName.MainScene).Forget();
+        SceneManager.LoadSceneAsync(SceneName.IngameScene).Forget();
     }
 }

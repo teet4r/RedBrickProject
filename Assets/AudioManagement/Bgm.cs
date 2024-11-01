@@ -39,6 +39,7 @@ public class Bgm : MonoBehaviour
             var handle = Addressables.LoadAssetAsync<AudioClip>(bgm.ToString());
             handle.WaitForCompletion();
             _bgms.Add(bgm, clip = handle.Result);
+            Addressables.Release(handle);
         }
 
         if (clip == _audioSource.clip)
