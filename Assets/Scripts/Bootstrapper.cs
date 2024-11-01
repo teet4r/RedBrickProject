@@ -15,7 +15,7 @@ public class Bootstrapper : MonoBehaviour
         await UniTask.WaitUntil(() =>
             SceneManager.Instance.IsLoaded ||
             AudioManager.Instance.IsLoaded ||
-            UIManager.Instance.IsLoaded
+            ObjectPoolManager.Instance.IsLoaded
         );
 
         SceneManager.LoadSceneAsync(SceneName.MainScene).Forget();
