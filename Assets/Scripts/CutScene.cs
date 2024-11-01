@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CutScene : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CutScene : MonoBehaviour
     private Image[] _sceneImages = null;
 
     private int _sceneNum = 0;
-    private Color _orgColor = new Color(1, 1, 1, 1); 
+    private Color _orgColor = new Color(1, 1, 1, 1);
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,8 @@ public class CutScene : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 1.0f;
+
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("IngameScene");
 
         yield break;
     }
