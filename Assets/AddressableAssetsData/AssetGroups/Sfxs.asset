@@ -16,7 +16,67 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c0cc2c83cf9a61b4abd204baa1364990
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0f9b67bbfa7af13469b321cdb6fa824a
+    m_Address: Tictoc0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1007342db639e5b44a14f23d22d8ddd7
+    m_Address: Fail1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c68e673cd554b247afc20ac262caad8
+    m_Address: Correct2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 216531eaf4db7ca41a39f82025920ddb
+    m_Address: Fail2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64928571055be214bb01d8e98be211d8
+    m_Address: GlassBreaking0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 700b6eb498d5bda48a9fcf33c472f5b8
+    m_Address: Tictoc1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab306e43427db2a40bb0114da34af010
+    m_Address: Correct0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4cf5489c45b4ec42861eea5b0209543
+    m_Address: GlassBreaking1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1d8aff4d5057084ea16f985c7bd3600
+    m_Address: Fail0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4bab102c14f94645aa3d10b29e79eb8
+    m_Address: Fail3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc1ecbddac2662d4d9b6b4aaccc8c1f6
+    m_Address: Click0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f05e1b9416b210446b3f5cef9cf968e9
+    m_Address: Correct1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 956aa756977d61342b6a58b1517bfb09, type: 2}
   m_SchemaSet:
