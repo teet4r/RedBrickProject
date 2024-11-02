@@ -12,12 +12,12 @@ public class Ingame : MonoBehaviour
     public bool IsClickable;
     public readonly ReactiveProperty<float> Timer = new(); // 남은 시간
     public readonly ReactiveProperty<int> MatchedCouples = new(); // 매치된 커플 수
-    private readonly List<GirlBody> _girls = new();
+    private readonly List<Girl> _girls = new();
 
-    public GirlBody CurrentGirl => _currentGirl;
-    private GirlBody _currentGirl;
+    public Girl CurrentGirl => _currentGirl;
+    private Girl _currentGirl;
 
-    public bool IsGameover => Timer.Value <= 0f;
+    private bool _isShownResult;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class Ingame : MonoBehaviour
         Initialize();
     }
 
-    private void Start()
+    public void StartGame()
     {
         Observable.EveryUpdate()
             .Subscribe(_ =>
@@ -35,6 +35,17 @@ public class Ingame : MonoBehaviour
                 if (Timer.Value < 0f)
                     Timer.Value = 0f;
                 IngameCanvas.Instance.TimerText.UpdateTime(Timer.Value);
+
+                if (Timer.Value <= 0f)
+                {
+                    if (_isShownResult)
+                        return;
+
+                    _isShownResult = true;
+                    IngameCanvas.Instance.ResultPanel.gameObject.SetActive(true);
+                    IngameCanvas.Instance.ResultPanel.ShowResult(MatchedCouples.Value >= 20);
+                    ObjectPoolManager.Instance.HideAll();
+                }
             })
             .AddTo(gameObject);
 
@@ -43,16 +54,18 @@ public class Ingame : MonoBehaviour
             .AddTo(gameObject);
 
         Vector2 pos = Vector2.zero;
+        int layer = 0;
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
                 for (int k = 0; k < 3; ++k)
                 {
-                    var girl = ObjectPoolManager.Instance.Get<GirlBody>();
+                    var girl = ObjectPoolManager.Instance.Get<Girl>();
                     pos.x = Random.Range(-8.5f, 8.5f);
                     pos.y = Random.Range(-4.5f, 1.5f);
                     girl.Tr.position = pos;
                     girl.SetClothes(i, j, k);
                     _girls.Add(girl);
+                    girl.SetOrderInLayer(layer += 4);
                     girl.StartMove();
                 }
         for (int i = 0; i < 30; ++i)
@@ -72,9 +85,10 @@ public class Ingame : MonoBehaviour
     public void Initialize()
     {
         IsClickable = true;
-        Timer.Value = 60f;
+        Timer.Value = 80f;
         MatchedCouples.Value = 0;
         _currentGirl = null;
+        _isShownResult = false;
         _girls.Clear();
     }
 
@@ -93,7 +107,7 @@ public class Ingame : MonoBehaviour
         IngameCanvas.Instance.DreamGirlPanel.HeartAnimator.Refresh();
     }
 
-    public void DestroyGirl(GirlBody girl)
+    public void DestroyGirl(Girl girl)
     {
         if (_girls.Remove(girl))
         {

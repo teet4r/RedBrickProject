@@ -18,6 +18,7 @@ public class Bgm : MonoBehaviour
         {
             _audioSource.volume = value;
             PlayerPrefs.SetFloat("BgmVolume", value);
+            PlayerPrefs.Save();
         }
     }
 

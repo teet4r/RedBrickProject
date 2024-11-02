@@ -9,18 +9,22 @@ public class MainMenu : MonoBehaviour
 
     private bool _isOption = false;
 
+    private void Start()
+    {
+        AudioManager.Instance.Bgm.Volume = PlayerPrefs.GetFloat("BgmVolume", 1f);
+        AudioManager.Instance.Sfx.Volume = PlayerPrefs.GetFloat("SfxVolume", 1f);
+        AudioManager.Instance.Bgm.Play(BgmName.Bgm0);
+    }
+
     public void BtnPlay()
     {
         if (_isOption) return;
 
         go_CutScene.SetActive(true);
-
-        Debug.Log("Play");
     }
 
     public void BtnOpenOption()
     {
-        Debug.Log("Option");
         go_Option.SetActive(true);
         _isOption = !_isOption;
     }
@@ -29,7 +33,6 @@ public class MainMenu : MonoBehaviour
     {
         if (_isOption) return;
 
-        Debug.Log("Exit");
         Application.Quit();
     }
 
@@ -38,6 +41,4 @@ public class MainMenu : MonoBehaviour
         go_Option.SetActive(false);
         _isOption = !_isOption;
     }
-
-
 }

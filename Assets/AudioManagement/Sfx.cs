@@ -17,6 +17,7 @@ public class Sfx : MonoBehaviour
         {
             _audioSource.volume = value;
             PlayerPrefs.SetFloat("SfxVolume", value);
+            PlayerPrefs.Save();
         }
     }
 

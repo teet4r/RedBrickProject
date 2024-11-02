@@ -19,6 +19,6 @@ public class Bootstrapper : MonoBehaviour
             SpriteLoader.Instance.IsLoaded
         );
 
-        SceneManager.LoadSceneAsync(SceneName.IngameScene).Forget();
+        SceneManager.Instance.LoadSceneAsync(SceneName.MainScene).Forget();
     }
 }

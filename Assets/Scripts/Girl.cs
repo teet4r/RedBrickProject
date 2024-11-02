@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class GirlBody : PoolObject
+public class Girl : PoolObject
 {
     public Sprite HairSprite => _hairRenderer.sprite;
     public Sprite TopSprite => _topRenderer.sprite;
@@ -16,9 +16,20 @@ public class GirlBody : PoolObject
     [SerializeField] private SpriteRenderer _hairRenderer;
     [SerializeField] private SpriteRenderer _topRenderer;
     [SerializeField] private SpriteRenderer _bottomRenderer;
+    [SerializeField] private Animator _animator;
+
+    private int _walkHash = Animator.StringToHash("Walk");
 
     private CancellationTokenSource _moveToken;
     private TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> _moveTween;
+
+    public void SetOrderInLayer(int layer)
+    {
+        _bodyRenderer.sortingOrder = layer;
+        _hairRenderer.sortingOrder = layer + 1;
+        _topRenderer.sortingOrder = layer + 2;
+        _bottomRenderer.sortingOrder = layer + 3;
+    }
 
     public void SetClothes(int hairIdx, int topIdx, int bottomIdx)
     {
@@ -27,7 +38,7 @@ public class GirlBody : PoolObject
         _bottomRenderer.sprite = SpriteLoader.Instance.Load($"GirlBottom{bottomIdx}");
     }
 
-    public bool IsEqual(GirlBody other)
+    public bool IsEqual(Girl other)
     {
         return _hairRenderer.sprite == other._hairRenderer.sprite
             && _topRenderer.sprite == other._topRenderer.sprite
@@ -93,13 +104,21 @@ public class GirlBody : PoolObject
         while (_moveToken != null && !_moveToken.IsCancellationRequested)
         {
             if (Random.Range(0, 2) == 0)
+            {
+                _animator.Rebind();
                 await UniTask.Delay(Random.Range(500, 2000), cancellationToken: _moveToken.Token);
+            }
             else
             {
+                _animator.SetTrigger(_walkHash);
                 var curPosX = transform.position.x;
                 targetPos.x = Random.Range(-8.5f, 8.5f);
                 targetPos.y = Random.Range(-4.5f, 1.5f);
-                _bodyRenderer.flipX = targetPos.x < curPosX;
+                var flipX = targetPos.x < curPosX;
+                _bodyRenderer.flipX = flipX;
+                _hairRenderer.flipX = flipX;
+                _topRenderer.flipX = flipX;
+                _bottomRenderer.flipX = flipX;
                 var speed = Random.Range(3f, 8f);
                 _moveTween = transform.DOMove(targetPos, speed);
                 await _moveTween.AsyncWaitForCompletion();

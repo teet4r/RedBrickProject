@@ -11,7 +11,7 @@ using UnityEditor.SceneManagement;
 
 public partial class SceneManager : SingletonBehaviour<SceneManager>
 {
-    public static async UniTask LoadSceneAsync(SceneName sceneName)
+    public async UniTask LoadSceneAsync(SceneName sceneName)
     {
         await UnitySceneManager.LoadSceneAsync((int)SceneName.EmptyScene);
         await UniTask.DelayFrame(1);

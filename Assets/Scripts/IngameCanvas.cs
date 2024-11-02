@@ -11,11 +11,14 @@ public class IngameCanvas : MonoBehaviour
     public ConnectText ConnectText => _connectText;
     public GuyPanel GuyPanel => _guyPanel;
     public DreamGirlPanel DreamGirlPanel => _dreamGirlPanel;
+    public ResultPanel ResultPanel => _resultPanel;
 
+    [SerializeField] private GameObject _readyPanel;
     [SerializeField] private TimerText _timerText;
     [SerializeField] private ConnectText _connectText;
     [SerializeField] private GuyPanel _guyPanel;
     [SerializeField] private DreamGirlPanel _dreamGirlPanel;
+    [SerializeField] private ResultPanel _resultPanel;
 
     private void Awake()
     {
