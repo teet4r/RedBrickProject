@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 
 public class MouseClicker : MonoBehaviour
 {
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
+    [SerializeField] private RectTransform _canvasRectTr;
 
-        Observable.EveryUpdate().Subscribe(_ =>
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && RectTransformUtility.ScreenPointToWorldPointInRectangle(_canvasRectTr, Input.mousePosition, null, out Vector3 Point))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                var effect = ObjectPoolManager.Instance.Get<ClickEffect>();
-                effect.Tr.position = Input.mousePosition;
-                effect.Play();
-            }
-        }).AddTo(gameObject);
+            var effect = ObjectPoolManager.Instance.Get<ClickEffect>();
+            effect.Tr.SetParent(_canvasRectTr);
+            effect.Tr.position = Point;
+            effect.Play();
+        }
     }
 }
