@@ -17,7 +17,7 @@ public class ClickEffect : PoolObject
     private async UniTask _Play()
     {
         _animator.SetTrigger(_clickHash);
-        await UniTask.Delay(500);
+        await UniTask.Delay(500, cancellationToken: disableCancellationToken);
         ObjectPoolManager.Instance.Return(this);
     }
 }

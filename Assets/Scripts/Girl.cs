@@ -62,12 +62,14 @@ public class Girl : PoolObject
             IngameCanvas.Instance.GuyPanel.SetHappyFace();
             Ingame.Instance.DestroyGirl(this);
             ++Ingame.Instance.MatchedCouples.Value;
+            AudioManager.Instance.Sfx.Play(SfxName.Correct1);
         }
         else
         {
             IngameCanvas.Instance.DreamGirlPanel.HeartAnimator.PlayBreakingHeart();
             IngameCanvas.Instance.GuyPanel.SetBadFace();
             Ingame.Instance.Timer.Value -= 1f;
+            AudioManager.Instance.Sfx.Play(SfxName.GlassBreaking1);
         }
 
         await UniTask.Delay(500);

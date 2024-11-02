@@ -32,11 +32,11 @@ public class Ingame : MonoBehaviour
             .Subscribe(_ =>
             {
                 Timer.Value -= Time.deltaTime;
+
                 if (Timer.Value < 0f)
                     Timer.Value = 0f;
-                IngameCanvas.Instance.TimerText.UpdateTime(Timer.Value);
 
-                if (Timer.Value <= 0f)
+                if (Timer.Value <= 0f || MatchedCouples.Value >= 20)
                 {
                     if (_isShownResult)
                         return;
@@ -46,6 +46,8 @@ public class Ingame : MonoBehaviour
                     IngameCanvas.Instance.ResultPanel.ShowResult(MatchedCouples.Value >= 20);
                     ObjectPoolManager.Instance.HideAll();
                 }
+
+                IngameCanvas.Instance.TimerText.UpdateTime(Timer.Value);
             })
             .AddTo(gameObject);
 

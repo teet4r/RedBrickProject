@@ -21,7 +21,7 @@ public class ResultPanel : MonoBehaviour
     {
         _successImage.SetActive(success);
         _failImage.SetActive(!success);
-        _remainTimeText.text = $"{Ingame.Instance.Timer.Value}초 만에";
+        _remainTimeText.text = $"{(80 - Ingame.Instance.Timer.Value).ToString("F2")}초 만에";
         _failContentText.text = $"{20 - Ingame.Instance.MatchedCouples.Value}커플이 모자라서 잘렸다...";
     }
 }

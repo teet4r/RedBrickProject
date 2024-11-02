@@ -41,4 +41,9 @@ public class MainMenu : MonoBehaviour
         go_Option.SetActive(false);
         _isOption = !_isOption;
     }
+
+    public void PlayClickSfx()
+    {
+        AudioManager.Instance.Sfx.Play(SfxName.Click0);
+    }
 }

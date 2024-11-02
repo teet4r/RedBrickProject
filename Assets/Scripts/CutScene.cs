@@ -54,14 +54,10 @@ public class CutScene : MonoBehaviour
         float curTime = 0.00f;
         float fadeTime = 0.5f;
 
-        Debug.Log("Start Fade Out");
-
         var canvasGroup = fadeBackGround.GetComponent<CanvasGroup>();
         while (curTime <= fadeTime)
         {
             canvasGroup.alpha = (Mathf.Lerp(0f, 1f, curTime / fadeTime));
-
-            Debug.Log("Fade Out");
 
             curTime += Time.deltaTime;
             yield return null;
