@@ -33,6 +33,8 @@ public class Ingame : MonoBehaviour
             {
                 Timer.Value -= Time.deltaTime;
 
+                
+
                 if (Timer.Value < 0f)
                     Timer.Value = 0f;
 
@@ -87,7 +89,7 @@ public class Ingame : MonoBehaviour
     public void Initialize()
     {
         IsClickable = true;
-        Timer.Value = 80f;
+        Timer.Value = 80;
         MatchedCouples.Value = 0;
         _currentGirl = null;
         _isShownResult = false;
