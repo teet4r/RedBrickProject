@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ingame : MonoBehaviour
 {
     public static Ingame Instance => _instance;
     private static Ingame _instance;
 
+    public bool IsClickable;
     public readonly ReactiveProperty<float> Timer = new(); // 남은 시간
     public readonly ReactiveProperty<int> MatchedCouples = new(); // 매치된 커플 수
-    public readonly ReactiveProperty<GirlBody> CurrentGirl = new();
-    private readonly List<GirlBody> Girls = new();
+    private readonly List<GirlBody> _girls = new();
 
-    private int _girlIndex = 0;
+    public GirlBody CurrentGirl => _currentGirl;
+    private GirlBody _currentGirl;
+
+    public bool IsGameover => Timer.Value <= 0f;
 
     private void Awake()
     {
@@ -30,7 +34,12 @@ public class Ingame : MonoBehaviour
                 Timer.Value -= Time.deltaTime;
                 if (Timer.Value < 0f)
                     Timer.Value = 0f;
+                IngameCanvas.Instance.TimerText.UpdateTime(Timer.Value);
             })
+            .AddTo(gameObject);
+
+        MatchedCouples
+            .Subscribe(matchedCount => IngameCanvas.Instance.ConnectText.UpdateConnect(matchedCount, 20))
             .AddTo(gameObject);
 
         Vector2 pos = Vector2.zero;
@@ -43,26 +52,53 @@ public class Ingame : MonoBehaviour
                     pos.y = Random.Range(-4.5f, 1.5f);
                     girl.Tr.position = pos;
                     girl.SetClothes(i, j, k);
-                    Girls.Add(girl);
+                    _girls.Add(girl);
+                    girl.StartMove();
                 }
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 30; ++i)
         {
-            var idx = Random.Range(0, Girls.Count);
-            Girls.RemoveAt(idx);
-            ObjectPoolManager.Instance.Return(Girls[idx]);
+            int idx1 = Random.Range(0, _girls.Count);
+            int idx2 = Random.Range(0, _girls.Count);
+            var g1 = _girls[idx1];
+            _girls[idx1] = _girls[idx2];
+            _girls[idx2] = g1;
         }
+        for (int i = 0; i < 4; ++i)
+            DestroyGirl(_girls[_girls.Count - 1]);
 
-        CurrentGirl.Value = Girls[_girlIndex++];
-
-        AudioManager.Instance.Bgm.Play(BgmName.Bgm0);
+        SetNextPair();
     }
 
     public void Initialize()
     {
+        IsClickable = true;
         Timer.Value = 60f;
         MatchedCouples.Value = 0;
-        Girls.Clear();
-        CurrentGirl.Value = null;
-        _girlIndex = 0;
+        _currentGirl = null;
+        _girls.Clear();
+    }
+
+    public void SetNextPair()
+    {
+        if (_girls.Count == 0)
+            return;
+
+        _currentGirl = _girls[Random.Range(0, _girls.Count)];
+
+        var girlImage = IngameCanvas.Instance.DreamGirlPanel.DreamGirlImage;
+        girlImage.SetHair(_currentGirl.HairSprite);
+        girlImage.SetTop(_currentGirl.TopSprite);
+        girlImage.SetBottom(_currentGirl.BottomSprite);
+        IngameCanvas.Instance.GuyPanel.SetRandomClothes();
+        IngameCanvas.Instance.DreamGirlPanel.HeartAnimator.Refresh();
+    }
+
+    public void DestroyGirl(GirlBody girl)
+    {
+        if (_girls.Remove(girl))
+        {
+            girl.StopMove();
+            ObjectPoolManager.Instance.Return(girl);
+        }
     }
 }

@@ -7,8 +7,8 @@ public class ConnectText : MonoBehaviour
 {
     [SerializeField] private Text _connectText;
 
-    public void UpdateConnect(float connectCount)
+    public void UpdateConnect(int connectCount, int maxCount)
     {
-        _connectText.text = connectCount.ToString();
+        _connectText.text = $"{connectCount}/{maxCount}";
     }
 }
