@@ -32,16 +32,16 @@ public partial class AudioManager
         StringBuilder bgmEnums = new();
         StringBuilder sfxEnums = new();
 
-        string bgmDir = $"{_creationPath}/Bgms";
-        string sfxDir = $"{_creationPath}/Sfxs";
+        string bgmDir = $"{Application.dataPath}/Resources/Bgms";
+        string sfxDir = $"{Application.dataPath}/Resources/Sfxs";
 
         if (!Directory.Exists(bgmDir))
             Directory.CreateDirectory(bgmDir);
         if (!Directory.Exists(sfxDir))
             Directory.CreateDirectory(sfxDir);
 
-        var bgms = Directory.GetFiles($"{_creationPath}/Bgms");
-        var sfxs = Directory.GetFiles($"{_creationPath}/Sfxs");
+        var bgms = Directory.GetFiles($"{Application.dataPath}/Resources/Bgms");
+        var sfxs = Directory.GetFiles($"{Application.dataPath}/Resources/Sfxs");
 
         for (int i = 0; i < bgms.Length; ++i)
         {

@@ -15,10 +15,11 @@ public class ObjectPoolManager : SingletonBehaviour<ObjectPoolManager>
         public ObjectPool(string prefabName, Transform parent)
         {
             _parent = parent;
-            var prefab = Addressables.LoadAssetAsync<GameObject>(prefabName);
-            prefab.WaitForCompletion();
-            _prefab = prefab.Result.GetComponent<PoolObject>(); // 스크립트와 프리팹 이름은 동일하게
-            Addressables.Release(prefab);
+            _prefab = Resources.Load<PoolObject>($"Prefabs/{prefabName}");
+            //var prefab = Addressables.LoadAssetAsync<GameObject>(prefabName);
+            //prefab.WaitForCompletion();
+            //_prefab = prefab.Result.GetComponent<PoolObject>(); // 스크립트와 프리팹 이름은 동일하게
+            //Addressables.Release(prefab);
         }
 
         public PoolObject Get()

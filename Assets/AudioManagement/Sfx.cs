@@ -35,10 +35,12 @@ public class Sfx : MonoBehaviour
     {
         if (!_sfxs.TryGetValue(sfx, out AudioClip clip))
         {
-            var handle = Addressables.LoadAssetAsync<AudioClip>(sfx.ToString());
-            handle.WaitForCompletion();
-            _sfxs.Add(sfx, clip = handle.Result);
-            Addressables.Release(handle);
+            clip = Resources.Load<AudioClip>($"Sfxs/{sfx}");
+            _sfxs.Add(sfx, clip);
+            //var handle = Addressables.LoadAssetAsync<AudioClip>(sfx.ToString());
+            //handle.WaitForCompletion();
+            //_sfxs.Add(sfx, clip = handle.Result);
+            //Addressables.Release(handle);
         }
         _audioSource.PlayOneShot(clip);
     }

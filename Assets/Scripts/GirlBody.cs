@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GirlBody : PoolObject
 {
@@ -10,8 +11,18 @@ public class GirlBody : PoolObject
 
     public void SetRandomClothes()
     {
-        _hairRenderer.sprite = SpriteLoader.Instance.Load($"GirlHair{Random.Range(0, 3)}");
-        _topRenderer.sprite = SpriteLoader.Instance.Load($"GirlTop{Random.Range(0, 3)}");
-        _bottomRenderer.sprite = SpriteLoader.Instance.Load($"GirlBottom{Random.Range(0, 3)}");
+        SetClothes(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 3));
+    }
+
+    public void SetClothes(int hairIdx, int topIdx, int bottomIdx)
+    {
+        _hairRenderer.sprite = SpriteLoader.Instance.Load($"GirlHair{hairIdx}");
+        _topRenderer.sprite = SpriteLoader.Instance.Load($"GirlTop{topIdx}");
+        _bottomRenderer.sprite = SpriteLoader.Instance.Load($"GirlBottom{bottomIdx}");
+    }
+
+    private void OnMouseUp()
+    {
+
     }
 }

@@ -11,15 +11,16 @@ public class SpriteLoader : SingletonBehaviour<SpriteLoader>
     {
         if (!_dict.TryGetValue(sourceName, out Sprite sprite))
         {
-            var asset = Addressables.LoadAssetAsync<Sprite>(sourceName);
-            asset.WaitForCompletion();
-            if (asset.Result != null)
-            {
-                _dict.Add(sourceName, sprite = asset.Result);
-                Addressables.Release(asset);
-            }
-            else
-                return null;
+            _dict.Add(sourceName, sprite = Resources.Load<Sprite>($"Sprites/{sourceName}"));
+            //var asset = Addressables.LoadAssetAsync<Sprite>(sourceName);
+            //asset.WaitForCompletion();
+            //if (asset.Result != null)
+            //{
+            //    _dict.Add(sourceName, sprite = asset.Result);
+            //    Addressables.Release(asset);
+            //}
+            //else
+            //    return null;
         }
         return sprite;
     }
