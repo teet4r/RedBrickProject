@@ -29,13 +29,6 @@ public class MainMenu : MonoBehaviour
         _isOption = !_isOption;
     }
 
-    public void BtnExit()
-    {
-        if (_isOption) return;
-
-        Application.Quit();
-    }
-
     public void BtnCloseOption()
     {
         go_Option.SetActive(false);
