@@ -33,8 +33,6 @@ public class Ingame : MonoBehaviour
             {
                 Timer.Value -= Time.deltaTime;
 
-                
-
                 if (Timer.Value < 0f)
                     Timer.Value = 0f;
 

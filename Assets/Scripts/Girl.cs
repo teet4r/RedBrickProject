@@ -26,9 +26,9 @@ public class Girl : PoolObject
     public void SetOrderInLayer(int layer)
     {
         _bodyRenderer.sortingOrder = layer;
-        _hairRenderer.sortingOrder = layer + 1;
+        _bottomRenderer.sortingOrder = layer + 1;
         _topRenderer.sortingOrder = layer + 2;
-        _bottomRenderer.sortingOrder = layer + 3;
+        _hairRenderer.sortingOrder = layer + 3;
     }
 
     public void SetClothes(int hairIdx, int topIdx, int bottomIdx)
@@ -45,12 +45,12 @@ public class Girl : PoolObject
             && _bottomRenderer.sprite == other._bottomRenderer.sprite;
     }
 
-    private void OnMouseUp()
+    private void OnMouseDown()
     {
-        _OnMouseUp().Forget();
+        _OnMouseDown().Forget();
     }
 
-    private async UniTask _OnMouseUp()
+    private async UniTask _OnMouseDown()
     {
         if (!Ingame.Instance.IsClickable)
             return;
