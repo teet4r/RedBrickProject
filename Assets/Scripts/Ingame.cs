@@ -87,7 +87,7 @@ public class Ingame : MonoBehaviour
     public void Initialize()
     {
         IsClickable = true;
-        Timer.Value = 80;
+        Timer.Value = 90;
         MatchedCouples.Value = 0;
         _currentGirl = null;
         _isShownResult = false;

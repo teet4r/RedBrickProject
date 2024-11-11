@@ -2191,10 +2191,10 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
-    m_LineSpacing: -1.1
+    m_LineSpacing: 1.1
   m_Text: "\uC218\uB9CE\uC740 \uC0AC\uB78C\uB4E4 \uC18D \uACE0\uAC1D\uC758 \uC774\uC0C1\uD615\uC744
     \uCC3E\uC544\uB77C!\n\uC774\uC0C1\uD615\uC744 \uCC3E\uC558\uB2E4\uBA74 \uD074\uB9AD!\n\uC81C\uD55C
-    \uC2DC\uAC04\uC740 \uB2E8 80\uCD08!\n\uC2DC\uAC04 \uC548\uC5D0 20\uCEE4\uD50C\uC744
+    \uC2DC\uAC04\uC740 \uB2E8 90\uCD08!\n\uC2DC\uAC04 \uC548\uC5D0 20\uCEE4\uD50C\uC744
     \uB9CC\uB4E4\uBA74 \uC131\uACF5!\n\uC2E4\uD328\uD55C\uB2E4\uBA74.. \uD574\uACE0!"
 --- !u!222 &1542810279
 CanvasRenderer:
